@@ -343,20 +343,36 @@
       <button class="btnASR" onclick="addToCart('The Psychology of Money', 449, this)">Add to cart</button>
     </div>
 
+
   </div>
 </section>
 
+<!-- Checkout Section -->
+<div id="checkoutSection" style="display:none; max-width:700px; margin: 32px auto 0 auto; background:#fff; border-radius:14px; box-shadow:0 2px 12px #80002022; padding:24px;">
+  <h2 style="color:#800020; margin-top:0;">Checkout</h2>
+  <div id="checkoutDetails"></div>
+  <button id="undoCheckoutBtn" onclick="undoCheckout()" style="margin-top:18px; background:#FFD700; color:#800020; border-radius:10px; font-weight:600; padding:8px 24px; font-size:1rem;">Undo</button>
+</div>
+
 <script>
+  // Cart logic
+  let cart = {};
+
   function addToCart(name, price, btn) {
-    // Find the quantity for this card
     let card = btn.closest('.product-cardASR');
     let qty = 1;
     if(card) {
       let val = card.querySelector('.quantity-valueASR');
       if(val) qty = parseInt(val.textContent) || 1;
     }
-    alert(`Added ${qty} copy${qty > 1 ? 'ies' : ''} of "${name}" to your cart! Total: ₹${price * qty}. Happy reading!`);
+    if(cart[name]) {
+      cart[name].qty += qty;
+    } else {
+      cart[name] = { price: price, qty: qty };
+    }
+    updateCheckout();
   }
+
   function changeQuantity(btn, delta) {
     let valSpan = btn.parentElement.querySelector('.quantity-valueASR');
     let val = parseInt(valSpan.textContent) || 1;
@@ -364,5 +380,34 @@
     if(val < 1) val = 1;
     if(val > 99) val = 99;
     valSpan.textContent = val;
+  }
+
+  function updateCheckout() {
+    let section = document.getElementById('checkoutSection');
+    let details = document.getElementById('checkoutDetails');
+    let items = Object.keys(cart);
+    if(items.length === 0) {
+      section.style.display = 'none';
+      details.innerHTML = '';
+      return;
+    }
+    let total = 0;
+    let html = '<table style="width:100%; border-collapse:collapse;">';
+    html += '<tr><th style="text-align:left;">Book</th><th>Copies</th><th>Price</th></tr>';
+    items.forEach(name => {
+      let item = cart[name];
+      let line = `<tr><td>${name}</td><td style="text-align:center;">${item.qty}</td><td style="text-align:right;">₹${item.price * item.qty}</td></tr>`;
+      html += line;
+      total += item.price * item.qty;
+    });
+    html += `<tr><td colspan="2" style="text-align:right;font-weight:bold;">Total:</td><td style="text-align:right;font-weight:bold;">₹${total}</td></tr>`;
+    html += '</table>';
+    details.innerHTML = html;
+    section.style.display = 'block';
+  }
+
+  function undoCheckout() {
+    cart = {};
+    updateCheckout();
   }
 </script>

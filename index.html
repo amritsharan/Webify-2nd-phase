@@ -349,16 +349,16 @@
 <script>
   function addToCart(name, price, btn) {
     // Find the quantity for this card
-    let card = btn.closest('.product-card');
+    let card = btn.closest('.product-cardASR');
     let qty = 1;
     if(card) {
-      let val = card.querySelector('.quantity-value');
+      let val = card.querySelector('.quantity-valueASR');
       if(val) qty = parseInt(val.textContent) || 1;
     }
     alert(`Added ${qty} copy${qty > 1 ? 'ies' : ''} of "${name}" to your cart! Total: ₹${price * qty}. Happy reading!`);
   }
   function changeQuantity(btn, delta) {
-    let valSpan = btn.parentElement.querySelector('.quantity-value');
+    let valSpan = btn.parentElement.querySelector('.quantity-valueASR');
     let val = parseInt(valSpan.textContent) || 1;
     val += delta;
     if(val < 1) val = 1;

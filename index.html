@@ -1,509 +1,833 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
 
-  <title>Webify Books</title>
+    <title>Webify Books</title>
 
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', Arial, sans-serif;
-      background: #F5F5DC;
-      min-height: 100vh;
-      color: #1A1A1A;
-      overflow-x: hidden;
-    }
-
-    #mainASR {
-      padding: 48px 16px 40px 16px;
-      text-align: center;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 2.6rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #800020;
-      margin-bottom: 10px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 8px 0;
-      box-shadow: 0 2px 8px #80002022;
-      text-shadow: none;
-      animation: fadeInDown 1s;
-      user-select: none;
-    }
-
-    .subtitleASR {
-      font-family: 'Poppins', Arial, sans-serif;
-      font-size: 1.1rem;
-      color: #4D4D4D;
-      margin-bottom: 32px;
-      font-style: italic;
-      letter-spacing: 0.5px;
-      animation: fadeInDown 1.2s;
-      user-select: none;
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .product-containerASR {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-      animation: fadeInUp 1.2s;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .product-cardASR {
-      background: #fff;
-      border-radius: 16px 22px 14px 18px/14px 18px 16px 22px;
-      box-shadow: 0 4px 16px 0 #A0522D22;
-      padding: 14px 8px 12px 8px;
-      width: 160px;
-      transition: box-shadow 0.25s, transform 0.22s, background 0.22s;
-      border: 2px solid #A0522D;
-      position: relative;
-      overflow: hidden;
-      outline: 1.5px solid #fff3;
-      margin-bottom: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .product-cardASR:hover {
-      box-shadow: 0 8px 32px 0 #FFD70055, 0 0 0 2px #FFD700;
-      background: #FFF8E1;
-      transform: translateY(-6px) scale(1.04) rotate(-1deg);
-      z-index: 2;
-      border-color: #FFD700;
-    }
-
-    .product-cardASR::before {
-      content: '';
-      position: absolute;
-      top: -40px; left: -40px;
-      width: 120px; height: 120px;
-      background: repeating-linear-gradient(135deg, #FFD70022 0 10px, #A0522D11 10px 20px);
-      opacity: 0.13;
-      border-radius: 50%;
-      z-index: 0;
-      filter: blur(1px);
-    }
-
-    .product-card:hover {
-      transform: translateY(-10px) scale(1.06) rotate(-1deg);
-      box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.22);
-      background: rgba(255,255,255,0.92);
-    }
-
-    .product-cardASR img {
-      width: 100%;
-      max-height: 60px;
-      object-fit: contain;
-      border-radius: 6px;
-      margin-bottom: 4px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-      transition: 0.3s;
-      z-index: 1;
-      position: relative;
-    }
-
-    .product-cardASR:hover img {
-      filter: brightness(1.08) saturate(1.2) drop-shadow(0 2px 8px #ffecd2);
-    }
-
-    .product-cardASR h2 {
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin: 0 0 2px 0;
-      letter-spacing: 0.1px;
-      z-index: 1;
-      position: relative;
-      color: #800020;
-    }
-
-    .product-cardASR p {
-      font-size: 0.65rem;
-      color: #4D4D4D;
-      margin: 0 0 4px 0;
-      z-index: 1;
-      position: relative;
-    }
-
-    .priceASR {
-      display: block;
-      margin: 2px 0 6px 0;
-      font-weight: 700;
-      color: #A0522D;
-      font-size: 0.82rem;
-      letter-spacing: 0.1px;
-      z-index: 1;
-      position: relative;
-    }
-
-    .quantity-controlsASR {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 0 0 4px 0;
-      gap: 4px;
-    }
-    .quantity-btnASR {
-      background: #fff;
-      border: 1.5px solid #A0522D;
-      color: #A0522D;
-      border-radius: 50%;
-      width: 22px;
-      height: 22px;
-      font-size: 1.1em;
-      font-weight: bold;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.18s, color 0.18s, border 0.18s;
-      user-select: none;
-    }
-    .quantity-btnASR:hover {
-      background: #FFD700;
-      color: #800020;
-      border-color: #FFD700;
-    }
-    .quantity-valueASR {
-      font-size: 0.95em;
-      font-weight: 600;
-      min-width: 18px;
-      text-align: center;
-      color: #333;
-    }
-    button {
-      padding: 6px 10px;
-      border: none;
-      background: linear-gradient(90deg, #800020 0%, #A0522D 100%);
-      color: #FFD700;
-      border-radius: 16px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 1px 4px #A0522D22;
-      transition: background 0.25s, transform 0.18s, color 0.18s;
-      z-index: 1;
-      position: relative;
-      font-family: 'Poppins', Arial, sans-serif;
-      letter-spacing: 0.2px;
-      margin-top: 2px;
-      outline: 1px solid #fff5;
-      align-self: center;
-    }
-
-    button:hover {
-      background: linear-gradient(90deg, #FFD700 0%, #A0522D 100%);
-      color: #800020;
-      transform: scale(1.07) rotate(-2deg);
-      box-shadow: 0 4px 16px #FFD70055;
-      filter: brightness(1.08);
-    }
-
-    @media (max-width: 900px) {
-      .product-container {
-        gap: 18px;
+    <style>
+      :root {
+        --ak_nav_bg: #fff9ee;
+        --ak_nav_border: #e3c9b0;
+        --ak_nav_text: #800020;
+        --ak_nav_hover: #ffd700;
       }
-      .product-card {
-        width: 90vw;
-        max-width: 340px;
+
+      body {
+        margin: 0;
+        font-family: "Poppins", Arial, sans-serif;
+        background: #f5f5dc;
+        min-height: 100vh;
+        color: #1a1a1a;
+        overflow-x: hidden;
       }
-    }
 
-    .categories h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: #F5F5DC;
-    }
+      #ak_nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--ak_nav_bg);
+        border-bottom: 1px solid var(--ak_nav_border);
+        box-shadow: 0 8px 24px #80002014;
+      }
 
-    .categories {
-      padding: 5rem 0;
-      background: url('images/backgrond image2.jpg') center/cover;
-      background-repeat: no-repeat;
-    }
+      .ak_navbar {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
 
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      max-width : 800px;
-      margin: 0 auto;
-    }
+      .ak_brand {
+        text-decoration: none;
+        color: var(--ak_nav_text);
+        font-size: 1.2rem;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+      }
 
-    .category-item {
-      position: relative;
-      aspect-ratio: 16/11;
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #F5F5DC;
-      border-radius: 16px;
-    }
+      .ak_menu_btn {
+        display: none;
+        border: 1px solid #a0522d;
+        background: #fff;
+        color: #800020;
+        border-radius: 10px;
+        padding: 6px 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
 
-    .category-name {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #d32f2f;
-      text-align: center;
-      z-index: 2;
-      position: relative;
-      transition: opacity 0.3s;
-    }
+      .ak_nav_links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-    .category-image {
-      position: absolute;
-      inset: 0;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      opacity: 0;
-      transform: translateX(-100%);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      z-index: 1;
-    }
+      .ak_nav_link {
+        display: inline-block;
+        text-decoration: none;
+        color: #5a1b2b;
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 7px 10px;
+        border-radius: 10px;
+        transition: background 0.2s, color 0.2s;
+      }
 
-    .category-item:hover .category-image {
-      opacity: 1;
-      transform: translateX(0);
-    }
+      .ak_nav_link:hover {
+        background: var(--ak_nav_hover);
+        color: #5a1b2b;
+      }
 
-    .category-item:hover .category-name {
-      opacity: 0;
-    }
-  </style>
-</head>
+      .ak_cart_badge {
+        margin-left: 6px;
+        font-size: 0.8rem;
+        padding: 1px 7px;
+        border-radius: 999px;
+        background: #800020;
+        color: #ffd700;
+      }
 
-<body>
+      #mainASR {
+        padding: 48px 16px 40px 16px;
+        text-align: center;
+        max-width: 1200px;
+        margin: auto;
+      }
 
-<section id="mainASR">
-  <h1>WEBIFY BOOKS</h1>
-    <div class="subtitleASR">Welcome to your cozy digital bookstore! Curated by real people, for real readers.</div>
-  <div class="product-containerASR">
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 2.6rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #800020;
+        margin-bottom: 10px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 8px 0;
+        box-shadow: 0 2px 8px #80002022;
+        text-shadow: none;
+        animation: fadeInDown 1s;
+        user-select: none;
+      }
 
-    <div class="product-cardASR">
-      <img src="https://images-na.ssl-images-amazon.com/images/I/81wgcld4wxL.jpg" alt="Atomic Habits">
-      <h2>Atomic Habits</h2>
-      <p>Build good habits and break bad ones.</p>
-      <span class="priceASR">₹499</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
+      .subtitleASR {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 1.1rem;
+        color: #4d4d4d;
+        margin-bottom: 32px;
+        font-style: italic;
+        letter-spacing: 0.5px;
+        animation: fadeInDown 1.2s;
+        user-select: none;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .product-containerASR {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        animation: fadeInUp 1.2s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .product-cardASR {
+        background: #fff;
+        border-radius: 16px 22px 14px 18px/14px 18px 16px 22px;
+        box-shadow: 0 4px 16px 0 #a0522d22;
+        padding: 14px 8px 12px 8px;
+        width: 160px;
+        transition:
+          box-shadow 0.25s,
+          transform 0.22s,
+          background 0.22s;
+        border: 2px solid #a0522d;
+        position: relative;
+        overflow: hidden;
+        outline: 1.5px solid #fff3;
+        margin-bottom: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .product-cardASR:hover {
+        box-shadow:
+          0 8px 32px 0 #ffd70055,
+          0 0 0 2px #ffd700;
+        background: #fff8e1;
+        transform: translateY(-6px) scale(1.04) rotate(-1deg);
+        z-index: 2;
+        border-color: #ffd700;
+      }
+
+      .product-cardASR::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        left: -40px;
+        width: 120px;
+        height: 120px;
+        background: repeating-linear-gradient(
+          135deg,
+          #ffd70022 0 10px,
+          #a0522d11 10px 20px
+        );
+        opacity: 0.13;
+        border-radius: 50%;
+        z-index: 0;
+        filter: blur(1px);
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px) scale(1.06) rotate(-1deg);
+        box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.22);
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      .product-cardASR img {
+        width: 100%;
+        max-height: 60px;
+        object-fit: contain;
+        border-radius: 6px;
+        margin-bottom: 4px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+        transition: 0.3s;
+        z-index: 1;
+        position: relative;
+      }
+
+      .product-cardASR:hover img {
+        filter: brightness(1.08) saturate(1.2) drop-shadow(0 2px 8px #ffecd2);
+      }
+
+      .product-cardASR h2 {
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin: 0 0 2px 0;
+        letter-spacing: 0.1px;
+        z-index: 1;
+        position: relative;
+        color: #800020;
+      }
+
+      .product-cardASR p {
+        font-size: 0.65rem;
+        color: #4d4d4d;
+        margin: 0 0 4px 0;
+        z-index: 1;
+        position: relative;
+      }
+
+      .priceASR {
+        display: block;
+        margin: 2px 0 6px 0;
+        font-weight: 700;
+        color: #a0522d;
+        font-size: 0.82rem;
+        letter-spacing: 0.1px;
+        z-index: 1;
+        position: relative;
+      }
+
+      .quantity-controlsASR {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 0 4px 0;
+        gap: 4px;
+      }
+      .quantity-btnASR {
+        background: #fff;
+        border: 1.5px solid #a0522d;
+        color: #a0522d;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.18s,
+          color 0.18s,
+          border 0.18s;
+        user-select: none;
+      }
+      .quantity-btnASR:hover {
+        background: #ffd700;
+        color: #800020;
+        border-color: #ffd700;
+      }
+      .quantity-valueASR {
+        font-size: 0.95em;
+        font-weight: 600;
+        min-width: 18px;
+        text-align: center;
+        color: #333;
+      }
+      button {
+        padding: 6px 10px;
+        border: none;
+        background: linear-gradient(90deg, #800020 0%, #a0522d 100%);
+        color: #ffd700;
+        border-radius: 16px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 1px 4px #a0522d22;
+        transition:
+          background 0.25s,
+          transform 0.18s,
+          color 0.18s;
+        z-index: 1;
+        position: relative;
+        font-family: "Poppins", Arial, sans-serif;
+        letter-spacing: 0.2px;
+        margin-top: 2px;
+        outline: 1px solid #fff5;
+        align-self: center;
+      }
+
+      button:hover {
+        background: linear-gradient(90deg, #ffd700 0%, #a0522d 100%);
+        color: #800020;
+        transform: scale(1.07) rotate(-2deg);
+        box-shadow: 0 4px 16px #ffd70055;
+        filter: brightness(1.08);
+      }
+
+      @media (max-width: 900px) {
+        .product-container {
+          gap: 18px;
+        }
+        .product-card {
+          width: 90vw;
+          max-width: 340px;
+        }
+
+        .ak_menu_btn {
+          display: inline-block;
+        }
+
+        .ak_nav_links {
+          display: none;
+          position: absolute;
+          top: 60px;
+          right: 16px;
+          min-width: 220px;
+          background: #fffdf7;
+          border: 1px solid var(--ak_nav_border);
+          border-radius: 12px;
+          box-shadow: 0 10px 28px #80002024;
+          padding: 8px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 4px;
+        }
+
+        .ak_nav_links.ak_open {
+          display: flex;
+        }
+
+        .ak_nav_link {
+          width: 100%;
+        }
+      }
+
+      .categories h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #f5f5dc;
+      }
+
+      .categories {
+        padding: 5rem 0;
+        background: url("images/backgrond image2.jpg") center/cover;
+        background-repeat: no-repeat;
+      }
+
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .category-item {
+        position: relative;
+        aspect-ratio: 16/11;
+        overflow: hidden;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5dc;
+        border-radius: 16px;
+      }
+
+      .category-name {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #d32f2f;
+        text-align: center;
+        z-index: 2;
+        position: relative;
+        transition: opacity 0.3s;
+      }
+
+      .category-image {
+        position: absolute;
+        inset: 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        transform: translateX(-100%);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+        z-index: 1;
+      }
+
+      .category-item:hover .category-image {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .category-item:hover .category-name {
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav id="ak_nav">
+      <div class="ak_navbar">
+        <a class="ak_brand" href="#mainASR">WEBIFY</a>
+        <button
+          id="ak_menu_btn"
+          class="ak_menu_btn"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="ak_nav_links"
+          onclick="ak_toggleMenu()"
+        >
+          ☰
+        </button>
+        <ul id="ak_nav_links" class="ak_nav_links">
+          <li><a class="ak_nav_link" href="#mainASR">Books</a></li>
+          <li><a class="ak_nav_link" href="#categories">Categories</a></li>
+          <li>
+            <a class="ak_nav_link" href="#checkoutSection"
+              >Checkout <span id="ak_cart_badge" class="ak_cart_badge">0</span></a
+            >
+          </li>
+        </ul>
       </div>
-      <button class="btnASR" onclick="addToCart('Atomic Habits', 499, this)">Add to cart</button>
+    </nav>
+    <section id="mainASR">
+      <h1>WEBIFY BOOKS</h1>
+      <div class="subtitleASR">
+        Welcome to your cozy digital bookstore! Curated by real people, for real
+        readers.
+      </div>
+      <div class="product-containerASR">
+        <div class="product-cardASR">
+          <img
+            src="https://images-na.ssl-images-amazon.com/images/I/81wgcld4wxL.jpg"
+            alt="Atomic Habits"
+          />
+          <h2>Atomic Habits</h2>
+          <p>Build good habits and break bad ones.</p>
+          <span class="priceASR">₹499</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button
+            class="btnASR"
+            onclick="addToCart('Atomic Habits', 499, this)"
+          >
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://images-na.ssl-images-amazon.com/images/I/81bsw6fnUiL.jpg"
+            alt="Rich Dad Poor Dad"
+          />
+          <h2>Rich Dad Poor Dad</h2>
+          <p>Learn financial intelligence and wealth mindset.</p>
+          <span class="priceASR">₹399</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button
+            class="btnASR"
+            onclick="addToCart('Rich Dad Poor Dad', 399, this)"
+          >
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://images-na.ssl-images-amazon.com/images/I/71UypkUjStL.jpg"
+            alt="Think and Grow Rich"
+          />
+          <h2>Think and Grow Rich</h2>
+          <p>Master the psychology of success.</p>
+          <span class="priceASR">₹299</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button
+            class="btnASR"
+            onclick="addToCart('Think and Grow Rich', 299, this)"
+          >
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://m.media-amazon.com/images/I/41ziEX0PJgL._SY445_SX342_FMwebp_.jpg"
+            alt="The Alchemist"
+          />
+          <h2>The Alchemist</h2>
+          <p>A journey of self-discovery and dreams.</p>
+          <span class="priceASR">₹349</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button
+            class="btnASR"
+            onclick="addToCart('The Alchemist', 349, this)"
+          >
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://m.media-amazon.com/images/I/41nS26MN37L._SY445_SX342_FMwebp_.jpg"
+            alt="Ikigai"
+          />
+          <h2>Ikigai</h2>
+          <p>The Japanese secret to a long and happy life.</p>
+          <span class="priceASR">₹299</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button class="btnASR" onclick="addToCart('Ikigai', 299, this)">
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://m.media-amazon.com/images/I/410hw6Q5a9L._SY445_SX342_FMwebp_.jpg"
+            alt="The Power of Now"
+          />
+          <h2>The Power of Now</h2>
+          <p>Guide to spiritual enlightenment and living in the present.</p>
+          <span class="priceASR">₹399</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button
+            class="btnASR"
+            onclick="addToCart('The Power of Now', 399, this)"
+          >
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://m.media-amazon.com/images/I/61BSGNwIMuL._SY466_.jpg"
+            alt="Deep Work"
+          />
+          <h2>Deep Work</h2>
+          <p>Rules for focused success in a distracted world.</p>
+          <span class="priceASR">₹379</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button class="btnASR" onclick="addToCart('Deep Work', 379, this)">
+            Add to cart
+          </button>
+        </div>
+
+        <div class="product-cardASR">
+          <img
+            src="https://m.media-amazon.com/images/I/415IOWJGdUL._SY445_SX342_QL70_FMwebp_.jpg"
+            alt="The Psychology of Money"
+          />
+          <h2>The Psychology of Money</h2>
+          <p>Timeless lessons on wealth, greed, and happiness.</p>
+          <span class="priceASR">₹449</span>
+          <div class="quantity-controlsASR">
+            <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">
+              -
+            </button>
+            <span class="quantity-valueASR">1</span>
+            <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">
+              +
+            </button>
+          </div>
+          <button
+            class="btnASR"
+            onclick="addToCart('The Psychology of Money', 449, this)"
+          >
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+      <div class="container">
+        <h2>SHOP BY CATEGORY</h2>
+        <div class="categories-grid">
+          <div class="category-item">
+            <div
+              class="category-image"
+              style="background-image: url(&quot;images/Programming.png&quot;)"
+            ></div>
+            <div class="category-name">Programming</div>
+          </div>
+          <div class="category-item">
+            <div
+              class="category-image"
+              style="background-image: url(&quot;images/fiction.jpg&quot;)"
+            ></div>
+            <div class="category-name">Fiction</div>
+          </div>
+          <div class="category-item">
+            <div
+              class="category-image"
+              style="background-image: url(&quot;images/Self help.jpg&quot;)"
+            ></div>
+            <div class="category-name">Self Help</div>
+          </div>
+          <div class="category-item">
+            <div
+              class="category-image"
+              style="background-image: url(&quot;images/comic.jpg&quot;)"
+            ></div>
+            <div class="category-name">Comics</div>
+          </div>
+          <div class="category-item">
+            <div
+              class="category-image"
+              style="background-image: url(&quot;images/science.jpg&quot;)"
+            ></div>
+            <div class="category-name">Science</div>
+          </div>
+          <div class="category-item">
+            <div
+              class="category-image"
+              style="background-image: url(&quot;images/history.jpeg&quot;)"
+            ></div>
+            <div class="category-name">History</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <div
+      id="checkoutSection"
+      style="
+        display: none;
+        max-width: 700px;
+        margin: 32px auto 0 auto;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 2px 12px #80002022;
+        padding: 24px;
+      "
+    >
+      <h2 style="color: #800020; margin-top: 0">Checkout</h2>
+      <div id="checkoutDetails"></div>
+      <button
+        id="undoCheckoutBtn"
+        onclick="undoCheckout()"
+        style="
+          margin-top: 18px;
+          background: #ffd700;
+          color: #800020;
+          border-radius: 10px;
+          font-weight: 600;
+          padding: 8px 24px;
+          font-size: 1rem;
+        "
+      >
+        Undo
+      </button>
     </div>
 
-    <div class="product-cardASR">
-      <img src="https://images-na.ssl-images-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
-      <h2>Rich Dad Poor Dad</h2>
-      <p>Learn financial intelligence and wealth mindset.</p>
-      <span class="priceASR">₹399</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('Rich Dad Poor Dad', 399, this)">Add to cart</button>
-    </div>
+    <script>
+      // Cart logic
+      let cart = {};
 
-    <div class="product-cardASR">
-      <img src="https://images-na.ssl-images-amazon.com/images/I/71UypkUjStL.jpg" alt="Think and Grow Rich">
-      <h2>Think and Grow Rich</h2>
-      <p>Master the psychology of success.</p>
-      <span class="priceASR">₹299</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('Think and Grow Rich', 299, this)">Add to cart</button>
-    </div>
+      function addToCart(name, price, btn) {
+        let card = btn.closest(".product-cardASR");
+        let qty = 1;
+        if (card) {
+          let val = card.querySelector(".quantity-valueASR");
+          if (val) qty = parseInt(val.textContent) || 1;
+        }
+        if (cart[name]) {
+          cart[name].qty += qty;
+        } else {
+          cart[name] = { price: price, qty: qty };
+        }
+        updateCheckout();
+      }
 
-    <div class="product-cardASR">
-      <img src="https://m.media-amazon.com/images/I/41ziEX0PJgL._SY445_SX342_FMwebp_.jpg" alt="The Alchemist">
-      <h2>The Alchemist</h2>
-      <p>A journey of self-discovery and dreams.</p>
-      <span class="priceASR">₹349</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('The Alchemist', 349, this)">Add to cart</button>
-    </div>
+      function changeQuantity(btn, delta) {
+        let valSpan = btn.parentElement.querySelector(".quantity-valueASR");
+        let val = parseInt(valSpan.textContent) || 1;
+        val += delta;
+        if (val < 1) val = 1;
+        if (val > 99) val = 99;
+        valSpan.textContent = val;
+      }
 
-    <div class="product-cardASR">
-      <img src="https://m.media-amazon.com/images/I/41nS26MN37L._SY445_SX342_FMwebp_.jpg" alt="Ikigai">
-      <h2>Ikigai</h2>
-      <p>The Japanese secret to a long and happy life.</p>
-      <span class="priceASR">₹299</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('Ikigai', 299, this)">Add to cart</button>
-    </div>
+      function updateCheckout() {
+        let section = document.getElementById("checkoutSection");
+        let details = document.getElementById("checkoutDetails");
+        let cartBadge = document.getElementById("ak_cart_badge");
+        let items = Object.keys(cart);
+        let cartCount = items.reduce((sum, name) => sum + cart[name].qty, 0);
 
-    <div class="product-cardASR">
-      <img src="https://m.media-amazon.com/images/I/410hw6Q5a9L._SY445_SX342_FMwebp_.jpg" alt="The Power of Now">
-      <h2>The Power of Now</h2>
-      <p>Guide to spiritual enlightenment and living in the present.</p>
-      <span class="priceASR">₹399</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('The Power of Now', 399, this)">Add to cart</button>
-    </div>
+        if (cartBadge) cartBadge.textContent = cartCount;
 
-    <div class="product-cardASR">
-      <img src="https://m.media-amazon.com/images/I/61BSGNwIMuL._SY466_.jpg" alt="Deep Work">
-      <h2>Deep Work</h2>
-      <p>Rules for focused success in a distracted world.</p>
-      <span class="priceASR">₹379</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('Deep Work', 379, this)">Add to cart</button>
-    </div>
+        if (items.length === 0) {
+          section.style.display = "none";
+          details.innerHTML = "";
+          return;
+        }
+        let total = 0;
+        let html = '<table style="width:100%; border-collapse:collapse;">';
+        html +=
+          '<tr><th style="text-align:left;">Book</th><th>Copies</th><th>Price</th></tr>';
+        items.forEach((name) => {
+          let item = cart[name];
+          let line = `<tr><td>${name}</td><td style="text-align:center;">${item.qty}</td><td style="text-align:right;">₹${item.price * item.qty}</td></tr>`;
+          html += line;
+          total += item.price * item.qty;
+        });
+        html += `<tr><td colspan="2" style="text-align:right;font-weight:bold;">Total:</td><td style="text-align:right;font-weight:bold;">₹${total}</td></tr>`;
+        html += "</table>";
+        details.innerHTML = html;
+        section.style.display = "block";
+      }
 
-    <div class="product-cardASR">
-      <img src="https://m.media-amazon.com/images/I/415IOWJGdUL._SY445_SX342_QL70_FMwebp_.jpg" alt="The Psychology of Money">
-      <h2>The Psychology of Money</h2>
-      <p>Timeless lessons on wealth, greed, and happiness.</p>
-      <span class="priceASR">₹449</span>
-      <div class="quantity-controlsASR">
-        <button class="quantity-btnASR" onclick="changeQuantity(this, -1)">-</button>
-        <span class="quantity-valueASR">1</span>
-        <button class="quantity-btnASR" onclick="changeQuantity(this, 1)">+</button>
-      </div>
-      <button class="btnASR" onclick="addToCart('The Psychology of Money', 449, this)">Add to cart</button>
-    </div>
+      function undoCheckout() {
+        cart = {};
+        updateCheckout();
+      }
 
+      function ak_toggleMenu() {
+        let links = document.getElementById("ak_nav_links");
+        let button = document.getElementById("ak_menu_btn");
+        if (!links || !button) return;
+        links.classList.toggle("ak_open");
+        button.setAttribute("aria-expanded", links.classList.contains("ak_open"));
+      }
 
-  </div>
-</section>
+      document.addEventListener("click", function (event) {
+        let nav = document.getElementById("ak_nav");
+        let links = document.getElementById("ak_nav_links");
+        let button = document.getElementById("ak_menu_btn");
+        if (!nav || !links || !button) return;
+        if (!nav.contains(event.target)) {
+          links.classList.remove("ak_open");
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
 
-<!-- Categories Section -->
-<section class="categories" id="categories">
-  <div class="container">
-    <h2>SHOP BY CATEGORY</h2>
-    <div class="categories-grid">
-      <div class="category-item">
-        <div class="category-image" style="background-image: url('images/Programming.png');"></div>
-        <div class="category-name">Programming</div>
-      </div>
-      <div class="category-item">
-        <div class="category-image" style="background-image: url('images/fiction.jpg');"></div>
-        <div class="category-name">Fiction</div>
-      </div>
-      <div class="category-item">
-        <div class="category-image" style="background-image: url('images/Self help.jpg');"></div>
-        <div class="category-name">Self Help</div>
-      </div>
-      <div class="category-item">
-        <div class="category-image" style="background-image: url('images/comic.jpg');"></div>
-        <div class="category-name">Comics</div>
-      </div>
-      <div class="category-item">
-        <div class="category-image" style="background-image: url('images/science.jpg');"></div>
-        <div class="category-name">Science</div>
-      </div>
-      <div class="category-item">
-        <div class="category-image" style="background-image: url('images/history.jpeg');"></div>
-        <div class="category-name">History</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Checkout Section -->
-<div id="checkoutSection" style="display:none; max-width:700px; margin: 32px auto 0 auto; background:#fff; border-radius:14px; box-shadow:0 2px 12px #80002022; padding:24px;">
-  <h2 style="color:#800020; margin-top:0;">Checkout</h2>
-  <div id="checkoutDetails"></div>
-  <button id="undoCheckoutBtn" onclick="undoCheckout()" style="margin-top:18px; background:#FFD700; color:#800020; border-radius:10px; font-weight:600; padding:8px 24px; font-size:1rem;">Undo</button>
-</div>
-
-<script>
-  // Cart logic
-  let cart = {};
-
-  function addToCart(name, price, btn) {
-    let card = btn.closest('.product-cardASR');
-    let qty = 1;
-    if(card) {
-      let val = card.querySelector('.quantity-valueASR');
-      if(val) qty = parseInt(val.textContent) || 1;
-    }
-    if(cart[name]) {
-      cart[name].qty += qty;
-    } else {
-      cart[name] = { price: price, qty: qty };
-    }
-    updateCheckout();
-  }
-
-  function changeQuantity(btn, delta) {
-    let valSpan = btn.parentElement.querySelector('.quantity-valueASR');
-    let val = parseInt(valSpan.textContent) || 1;
-    val += delta;
-    if(val < 1) val = 1;
-    if(val > 99) val = 99;
-    valSpan.textContent = val;
-  }
-
-  function updateCheckout() {
-    let section = document.getElementById('checkoutSection');
-    let details = document.getElementById('checkoutDetails');
-    let items = Object.keys(cart);
-    if(items.length === 0) {
-      section.style.display = 'none';
-      details.innerHTML = '';
-      return;
-    }
-    let total = 0;
-    let html = '<table style="width:100%; border-collapse:collapse;">';
-    html += '<tr><th style="text-align:left;">Book</th><th>Copies</th><th>Price</th></tr>';
-    items.forEach(name => {
-      let item = cart[name];
-      let line = `<tr><td>${name}</td><td style="text-align:center;">${item.qty}</td><td style="text-align:right;">₹${item.price * item.qty}</td></tr>`;
-      html += line;
-      total += item.price * item.qty;
-    });
-    html += `<tr><td colspan="2" style="text-align:right;font-weight:bold;">Total:</td><td style="text-align:right;font-weight:bold;">₹${total}</td></tr>`;
-    html += '</table>';
-    details.innerHTML = html;
-    section.style.display = 'block';
-  }
-
-  function undoCheckout() {
-    cart = {};
-    updateCheckout();
-  }
-</script>
+      updateCheckout();
+    </script>
+  </body>
+</html>

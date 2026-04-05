@@ -430,6 +430,174 @@
       .category-item:hover .category-name {
         opacity: 0;
       }
+
+      .site-footer {
+        margin-top: 48px;
+        background: linear-gradient(180deg, #fff9ee 0%, #f0e5d2 100%);
+        border-top: 1px solid #d5bfa6;
+        padding: 44px 16px 28px;
+      }
+
+      .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.25fr 1fr 1.25fr;
+        gap: 30px;
+      }
+
+      .footer-about {
+        justify-self: start;
+      }
+
+      .footer-social {
+        justify-self: center;
+      }
+
+      .footer-gallery {
+        justify-self: end;
+      }
+
+      .footer-title {
+        margin: 0 0 18px;
+        color: #800020;
+        font-size: 1.95rem;
+        letter-spacing: 1px;
+        font-weight: 700;
+      }
+
+      .footer-about p {
+        margin: 0;
+        color: #5a1b2b;
+        line-height: 1.8;
+        font-size: 1rem;
+        max-width: 420px;
+      }
+
+      .footer-social-list {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .footer-social-link {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 1px solid #ddc8b1;
+        color: #800020;
+        font-weight: 700;
+        font-size: 1rem;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .footer-social-link img {
+        width: 22px;
+        height: 22px;
+        object-fit: contain;
+      }
+
+      .footer-social-link:hover {
+        transform: translateY(-4px);
+        background: #800020;
+        color: #ffd700;
+        border-color: #800020;
+        box-shadow: 0 8px 18px #8000202e;
+      }
+
+      .footer-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 72px);
+        gap: 8px;
+        justify-content: start;
+      }
+
+      .footer-gallery-item {
+        display: block;
+        width: 72px;
+        height: 62px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #d8c3ac;
+        background: #fff;
+      }
+
+      .footer-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .footer-gallery-item:hover img {
+        transform: scale(1.08);
+      }
+
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 28px auto 0;
+        padding-top: 16px;
+        border-top: 1px solid #d9c4ad;
+        color: #6d3343;
+        font-size: 0.95rem;
+        text-align: center;
+      }
+
+      @media (max-width: 980px) {
+        .footer-inner {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .footer-about,
+        .footer-social,
+        .footer-gallery {
+          justify-self: start;
+        }
+
+        .footer-gallery-grid {
+          grid-template-columns: repeat(4, 68px);
+          justify-content: start;
+        }
+
+        .footer-gallery-item {
+          width: 68px;
+          height: 58px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .footer-title {
+          font-size: 1.45rem;
+        }
+
+        .footer-social-link {
+          width: 44px;
+          height: 44px;
+          font-size: 0.9rem;
+        }
+
+        .footer-gallery-grid {
+          grid-template-columns: repeat(3, 64px);
+          gap: 7px;
+        }
+
+        .footer-gallery-item {
+          width: 64px;
+          height: 54px;
+        }
+      }
     </style>
   </head>
 
@@ -744,6 +912,72 @@
         Undo
       </button>
     </div>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-about">
+          <h3 class="footer-title">ABOUT US</h3>
+          <p>
+            Webify Books is your neighborhood shelf in digital form. We curate
+            thoughtful titles, timeless classics, and modern must-reads for every
+            kind of reader.
+          </p>
+        </div>
+
+        <div class="footer-social">
+          <h3 class="footer-title">CONNECT WITH US</h3>
+          <div class="footer-social-list">
+            <a class="footer-social-link" href="#" aria-label="Facebook"
+              ><img src="images/F.avif" alt="Facebook"
+            /></a>
+            <a class="footer-social-link" href="#" aria-label="Twitter"
+              ><img src="images/T.jpeg" alt="Twitter"
+            /></a>
+            <a class="footer-social-link" href="#" aria-label="YouTube"
+              ><img src="images/Y.jpg" alt="YouTube"
+            /></a>
+            <a class="footer-social-link" href="#" aria-label="Instagram"
+              ><img src="images/I.avif" alt="Instagram"
+            /></a>
+            <a class="footer-social-link" href="#" aria-label="Pinterest"
+              ><img src="images/P.avif" alt="Pinterest"
+            /></a>
+          </div>
+        </div>
+
+        <div class="footer-gallery">
+          <h3 class="footer-title">GALLERY</h3>
+          <div class="footer-gallery-grid">
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 1"
+              ><img src="images/Programming.png" alt="Programming books"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 2"
+              ><img src="images/fiction.jpg" alt="Fiction books"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 3"
+              ><img src="images/Self help.jpg" alt="Self help books"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 4"
+              ><img src="images/comic.jpg" alt="Comic books"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 5"
+              ><img src="images/science.jpg" alt="Science books"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 6"
+              ><img src="images/history.jpeg" alt="History books"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 7"
+              ><img src="images/fiction.jpg" alt="Fiction bookshelf"
+            /></a>
+            <a class="footer-gallery-item" href="#" aria-label="Gallery image 8"
+              ><img src="images/Programming.png" alt="Programming shelf"
+            /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">&copy; 2026 Webify Books. All rights reserved.</div>
+    </footer>
 
     <script>
       // Cart logic
